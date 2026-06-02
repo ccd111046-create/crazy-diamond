@@ -196,3 +196,4 @@ window.updateScore = function (studentId, change) {
     renderScoreboard(); // 更新畫面
   }
 };
+
