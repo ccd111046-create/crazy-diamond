@@ -1,4 +1,6 @@
-// 1. 定義正確的步驟順序（Array 索引即為正確順序，並加入對應的圖片檔名）
+// ==========================================
+// 1. 遊戲核心與拖曳設定
+// ==========================================
 const correctSteps = [
   { id: "step1", text: "將生理食鹽水倒在傷口上", image: "1.png" },
   { id: "step2", text: "拿出乾淨的棉花棒擦傷口", image: "2.png" },
@@ -51,7 +53,7 @@ function initGame() {
     card.setAttribute("draggable", "true");
     card.setAttribute("id", step.id);
 
-    // 【修改重點】：動態插入圖片 (<img>) 與說明文字 (<span>)
+    // 動態插入圖片與說明文字
     card.innerHTML = `
       <img src="${step.image}" alt="${step.text}" class="card-img">
       <span class="card-text">${step.text}</span>
@@ -68,12 +70,6 @@ function initGame() {
 // 拖曳相關函式
 let draggedElement = null;
 
-function dragStart(e) {
-  draggedElement = this;
-  setTimeout(() => this.classList.add("dragging"), 0);
-}
-
-// 修正：補上之前遺漏的 e 參數，並加上 dataTransfer 設定以增加跨瀏覽器支援度
 function dragStart(e) {
   draggedElement = this;
   if (e.dataTransfer) {
@@ -142,3 +138,61 @@ resetBtn.addEventListener("click", initGame);
 
 // 網頁載入時直接啟動
 initGame();
+
+// ==========================================
+// 2. 學生計分板功能
+// ==========================================
+const studentNameInput = document.getElementById("studentNameInput");
+const addStudentBtn = document.getElementById("addStudentBtn");
+const studentList = document.getElementById("studentList");
+
+// 儲存學生資料的陣列
+let students = [];
+
+// 點擊「新增學生」按鈕時的動作
+addStudentBtn.addEventListener("click", () => {
+  const name = studentNameInput.value.trim(); // 取得輸入的姓名並去除空白
+  if (name) {
+    // 將新學生加入陣列，預設 0 分
+    students.push({ id: Date.now(), name: name, score: 0 });
+    studentNameInput.value = ""; // 清空輸入框
+    renderScoreboard(); // 更新畫面
+  }
+});
+
+// 讓輸入框按 Enter 也能新增學生
+studentNameInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    addStudentBtn.click();
+  }
+});
+
+// 重新繪製計分板畫面
+function renderScoreboard() {
+  studentList.innerHTML = ""; // 先清空目前的清單
+
+  students.forEach((student) => {
+    const item = document.createElement("div");
+    item.classList.add("student-item");
+
+    item.innerHTML = `
+            <div class="student-info">
+                ${student.name} <span class="student-score">${student.score}</span> 分
+            </div>
+            <div class="score-controls">
+                <button class="btn-plus" onclick="updateScore(${student.id}, 1)">+1</button>
+                <button class="btn-minus" onclick="updateScore(${student.id}, -1)">-1</button>
+            </div>
+        `;
+    studentList.appendChild(item);
+  });
+}
+
+// 加分/扣分的功能（設為全域變數以便在 HTML 中使用 onclick 呼叫）
+window.updateScore = function (studentId, change) {
+  const student = students.find((s) => s.id === studentId);
+  if (student) {
+    student.score += change;
+    renderScoreboard(); // 更新畫面
+  }
+};
