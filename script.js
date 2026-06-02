@@ -197,3 +197,4 @@ window.updateScore = function (studentId, change) {
   }
 };
 
+
