@@ -42,7 +42,7 @@ h1 {
 
 .drop-zone {
     width: 165px; 
-    height: 185px; 
+    height: 215px; 
     border: 3px dashed #bbb;
     border-radius: 10px;
     background-color: #fff;
@@ -79,7 +79,7 @@ h1 {
 
 .step-card {
     width: 150px; 
-    height: 170px; 
+    height: 200px; 
     background-color: #ffffff; 
     border: 2px solid #ff4d6d;
     border-radius: 8px;
@@ -112,7 +112,7 @@ h1 {
     font-size: 0.85rem;
     font-weight: bold;
     color: #333;
-    line-height: 1.2;
+    line-height: 1.6; /* 加大行高，不讓注音跟上一行撞到 */
     text-align: center;
 }
 
@@ -256,4 +256,9 @@ h1 {
         max-width: 600px;
         margin-top: 20px;
     }
+}
+rt {
+    font-size: 0.55rem;
+    font-weight: normal;
+    color: #666; /* 稍微淡一點的顏色，比較精緻 */
 }

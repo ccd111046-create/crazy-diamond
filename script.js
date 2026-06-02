@@ -1,17 +1,77 @@
 // ==========================================
-// 1. 遊戲核心與拖曳設定
+// 1. 遊戲核心與拖曳設定（包含注音資料）
 // ==========================================
 const correctSteps = [
-  { id: "step1", text: "將生理食鹽水倒在傷口上", image: "1.png" },
-  { id: "step2", text: "拿出乾淨的棉花棒擦傷口", image: "2.png" },
-  { id: "step3", text: "拿出優碘和一根新的棉花棒", image: "3.png" },
-  { id: "step4", text: "滴一點點優碘在棉花棒上", image: "4.png" },
-  { id: "step5", text: "用棉花棒擦傷口", image: "5.png" },
-  { id: "step6", text: "再拿出一根新的棉花棒及外傷藥膏", image: "6.png" },
-  { id: "step7", text: "擠一點點藥膏到棉花棒上", image: "7.png" },
-  { id: "step8", text: "用棉花棒在傷口上繞圈圈", image: "8.png" },
-  { id: "step9", text: "拿出OK蹦撕開", image: "9.png" },
-  { id: "step10", text: "貼在傷口上", image: "10.png" },
+  {
+    id: "step1",
+    text: "將生理食鹽水倒在傷口上",
+    zhuyin:
+      "<ruby>將<rt>ㄐㄧㄤ</rt>生<rt>ㄕㄥ</rt>理<rt>ㄌㄧˇ</rt>食<rt>ㄕˊ</rt>鹽<rt>ㄧㄢˊ</rt>水<rt>ㄕㄨㄟˇ</rt>倒<rt>ㄉㄠˋ</rt>在<rt>ㄗㄞˋ</rt>傷<rt>ㄕㄤ</rt>口<rt>ㄎㄡˇ</rt>上<rt>ㄕㄤˋ</rt></ruby>",
+    image: "1.png",
+  },
+  {
+    id: "step2",
+    text: "拿出乾淨的棉花棒擦傷口",
+    zhuyin:
+      "<ruby>拿<rt>ㄋㄚˊ</rt>出<rt>ㄔㄨ</rt>乾<rt>ㄍㄢ</rt>淨<rt>ㄐㄧㄥˋ</rt>的<rt>ㄉㄜ˙</rt>棉<rt>ㄇㄧㄢˊ</rt>花<rt>ㄏㄨㄚ</rt>棒<rt>ㄅㄤˋ</rt>擦<rt>ㄘㄚ</rt>傷<rt>ㄕㄤ</rt>口<rt>ㄎㄡˇ</rt></ruby>",
+    image: "2.png",
+  },
+  {
+    id: "step3",
+    text: "拿出優碘和一根新的棉花棒",
+    zhuyin:
+      "<ruby>拿<rt>ㄋㄚˊ</rt>出<rt>ㄔㄨ</rt>優<rt>ㄧㄡ</rt>碘<rt>ㄉㄧㄢˇ</rt>和<rt>ㄏㄢˋ</rt>一<rt>ㄧˋ</rt>根<rt>ㄍㄣ</rt>新<rt>ㄒㄧㄣ</rt>的<rt>ㄉㄜ˙</rt>棉<rt>ㄇㄧㄢˊ</rt>花<rt>ㄏㄨㄚ</rt>棒<rt>ㄅㄤˋ</rt></ruby>",
+    image: "3.png",
+  },
+  {
+    id: "step4",
+    text: "滴一點點優碘在棉花棒上",
+    zhuyin:
+      "<ruby>滴<rt>ㄉㄧ</rt>一<rt>ㄧˋ</rt>點<rt>ㄉㄧㄢˇ</rt>點<rt>ㄉㄧㄢˇ</rt>優<rt>ㄧㄡ</rt>碘<rt>ㄉㄧㄢˇ</rt>在<rt>ㄗㄞˋ</rt>棉<rt>ㄇㄧㄢˊ</rt>花<rt>ㄏㄨㄚ</rt>棒<rt>ㄅㄤˋ</rt>上<rt>ㄕㄤˋ</rt></ruby>",
+    image: "4.png",
+  },
+  {
+    id: "step5",
+    text: "用棉花棒擦傷口",
+    zhuyin:
+      "<ruby>用<rt>ㄩㄥˋ</rt>棉<rt>ㄇㄧㄢˊ</rt>花<rt>ㄏㄨㄚ</rt>棒<rt>ㄅㄤˋ</rt>擦<rt>ㄘㄚ</rt>傷<rt>ㄕㄤ</rt>口<rt>ㄎㄡˇ</rt></ruby>",
+    image: "5.png",
+  },
+  {
+    id: "step6",
+    text: "再拿出一根新的棉花棒及外傷藥膏",
+    zhuyin:
+      "<ruby>再<rt>ㄗㄞˋ</rt>拿<rt>ㄋㄚˊ</rt>出<rt>ㄔㄨ</rt>一<rt>ㄧˋ</rt>根<rt>ㄍㄣ</rt>新<rt>ㄒㄧㄣ</rt>的<rt>ㄉㄜ˙</rt>棉<rt>ㄇㄧㄢˊ</rt>花<rt>ㄏㄨㄚ</rt>棒<rt>ㄅㄤˋ</rt>及<rt>ㄐㄧˊ</rt>外<rt>ㄨㄞˋ</rt>傷<rt>ㄕㄤ</rt>藥<rt>ㄧㄠˋ</rt>膏<rt>ㄍㄠ</rt></ruby>",
+    image: "6.png",
+  },
+  {
+    id: "step7",
+    text: "擠一點點藥膏到棉花棒上",
+    zhuyin:
+      "<ruby>擠<rt>ㄐㄧˇ</rt>一<rt>ㄧˋ</rt>點<rt>ㄉㄧㄢˇ</rt>點<rt>ㄉㄧㄢˇ</rt>藥<rt>ㄧㄠˋ</rt>膏<rt>ㄍㄠ</rt>到<rt>ㄉㄠˋ</rt>棉<rt>ㄇㄧㄢˊ</rt>花<rt>ㄏㄨㄚ</rt>棒<rt>ㄅㄤˋ</rt>上<rt>ㄕㄤˋ</rt></ruby>",
+    image: "7.png",
+  },
+  {
+    id: "step8",
+    text: "用棉花棒在傷口上繞圈圈",
+    zhuyin:
+      "<ruby>用<rt>ㄩㄥˋ</rt>棉<rt>ㄇㄧㄢˊ</rt>花<rt>ㄏㄨㄚ</rt>棒<rt>ㄅㄤˋ</rt>在<rt>ㄗㄞˋ</rt>傷<rt>ㄕㄤ</rt>口<rt>ㄎㄡˇ</rt>上<rt>ㄕㄤˋ</rt>繞<rt>ㄖㄠˋ</rt>圈<rt>ㄑㄩㄢ</rt>圈<rt>ㄑㄩㄢ</rt></ruby>",
+    image: "8.png",
+  },
+  {
+    id: "step9",
+    text: "拿出OK蹦撕開",
+    zhuyin:
+      "<ruby>拿<rt>ㄋㄚˊ</rt>出<rt>ㄔㄨ</rt></ruby> OK <ruby>蹦<rt>ㄅㄥˋ</rt>撕<rt>ㄙ</rt>開<rt>ㄎㄞ</rt></ruby>",
+    image: "9.png",
+  },
+  {
+    id: "step10",
+    text: "貼在傷口上",
+    zhuyin:
+      "<ruby>貼<rt>ㄊㄧㄝ</rt>在<rt>ㄗㄞˋ</rt>傷<rt>ㄕㄤ</rt>口<rt>ㄎㄡˇ</rt>上<rt>ㄕㄤˋ</rt></ruby>",
+    image: "10.png",
+  },
 ];
 
 const targetContainer = document.getElementById("targetContainer");
@@ -53,10 +113,10 @@ function initGame() {
     card.setAttribute("draggable", "true");
     card.setAttribute("id", step.id);
 
-    // 動態插入圖片與說明文字
+    // 動態插入圖片與帶有注音的說明文字
     card.innerHTML = `
       <img src="${step.image}" alt="${step.text}" class="card-img">
-      <span class="card-text">${step.text}</span>
+      <span class="card-text">${step.zhuyin}</span>
     `;
 
     // 監聽開始與結束拖曳
@@ -188,7 +248,7 @@ function renderScoreboard() {
   });
 }
 
-// 加分/扣分的功能（設為全域變數以便在 HTML 中使用 onclick 呼叫）
+// 加分/扣分的功能
 window.updateScore = function (studentId, change) {
   const student = students.find((s) => s.id === studentId);
   if (student) {
@@ -196,5 +256,3 @@ window.updateScore = function (studentId, change) {
     renderScoreboard(); // 更新畫面
   }
 };
-
-
