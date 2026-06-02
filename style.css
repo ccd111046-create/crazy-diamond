@@ -1,0 +1,131 @@
+body {
+    font-family: 'Microsoft JhengHei', sans-serif;
+    background-color: #f4f7f6;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+.hint {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* 答案格子區 */
+.target-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px auto;
+    max-width: 1000px;
+}
+
+.drop-zone {
+    width: 165px; /* 稍微加寬 */
+    height: 185px; /* 加高以容納新卡片 */
+    border: 3px dashed #bbb;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.05);
+}
+
+.drop-zone::before {
+    content: attr(data-step); /* 顯示步驟數字 1~10 */
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ddd;
+}
+
+/* 待拖曳的步驟卡片 */
+.source-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #e9ecef;
+    border-radius: 15px;
+    max-width: 1000px;
+    min-height: 150px;
+}
+
+.step-card {
+    width: 150px; /* 卡片加寬 */
+    height: 170px; /* 卡片加高 */
+    background-color: #ffffff; /* 改為白底，讓圖片更乾淨突出 */
+    border: 2px solid #ff4d6d;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column; /* 改為垂直排列：圖在上、文在下 */
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px;
+    box-sizing: border-box; /* 確保 padding 不會撐破卡片 */
+    cursor: grab;
+    user-select: none;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.step-card:active {
+    cursor: grabbing;
+    transform: scale(0.95);
+}
+
+/* 新增：卡片內的圖片樣式 */
+.card-img {
+    width: 100%;
+    height: 100px; /* 固定圖片高度 */
+    object-fit: cover; /* 讓圖片填滿範圍且不變形 */
+    border-radius: 4px;
+    margin-bottom: 8px; /* 和下方文字保持一點距離 */
+}
+
+/* 新增：卡片內的文字樣式 */
+.card-text {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #333;
+    line-height: 1.2;
+    text-align: center;
+}
+
+/* 拖曳中樣式 */
+.dragging {
+    opacity: 0.5;
+}
+
+/* 按鈕樣式 */
+.button-area button {
+    font-size: 1.2rem;
+    padding: 10px 25px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#checkBtn { background-color: #2ec4b6; color: white; }
+#resetBtn { background-color: #e71d36; color: white; }
+
+.message {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+}
+.correct { color: #2a9d8f; }
+.wrong { color: #e76f51; }
