@@ -14,7 +14,7 @@ h1 {
     font-size: 1.1rem;
 }
 
-/* ================== 新增：左右分欄彈性版面 ================== */
+/* ================== 左右分欄彈性版面 ================== */
 .main-layout {
     display: flex;
     justify-content: center;
@@ -41,8 +41,8 @@ h1 {
 }
 
 .drop-zone {
-    width: 165px; 
-    height: 215px; 
+    width: 185px; /* 稍微加寬以容納新卡片 */
+    height: 225px; /* 加高 */
     border: 3px dashed #bbb;
     border-radius: 10px;
     background-color: #fff;
@@ -78,8 +78,8 @@ h1 {
 }
 
 .step-card {
-    width: 150px; 
-    height: 200px; 
+    width: 170px; /* 卡片加寬 */
+    height: 210px; /* 卡片加高 */
     background-color: #ffffff; 
     border: 2px solid #ff4d6d;
     border-radius: 8px;
@@ -92,12 +92,23 @@ h1 {
     cursor: grab;
     user-select: none;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
+    
+    /* 修改：加入放大與陰影的平滑動畫過渡 */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; 
+    position: relative; /* 確保放大時可以設定 z-index 浮在最上層 */
+}
+
+/* ================== 新增：滑鼠懸停放大特效 ================== */
+.step-card:hover {
+    transform: scale(1.15); /* 放大 1.15 倍 */
+    box-shadow: 0 12px 20px rgba(0,0,0,0.25); /* 加深陰影產生漂浮感 */
+    z-index: 100; /* 讓放大的卡片蓋過旁邊的其他卡片 */
 }
 
 .step-card:active {
     cursor: grabbing;
     transform: scale(0.95);
+    z-index: 100;
 }
 
 .card-img {
@@ -108,12 +119,31 @@ h1 {
     margin-bottom: 8px; 
 }
 
+/* ================== 修改：卡片內的注音排版 (右側直排) ================== */
 .card-text {
-    font-size: 0.85rem;
+    font-size: 0.95rem; 
     font-weight: bold;
     color: #333;
-    line-height: 1.6; /* 加大行高，不讓注音跟上一行撞到 */
+    line-height: 1.8; /* 增加行高，讓上下行不會擠在一起 */
     text-align: center;
+}
+
+/* 覆寫預設標籤，不要讓注音壓在上面 */
+.card-text ruby {
+    display: inline;
+}
+
+/* 將注音符號設定為垂直排列，並靠在國字右邊 */
+.card-text rt {
+    display: inline-block;
+    writing-mode: vertical-rl; /* 讓注音符號直排 */
+    text-orientation: upright;
+    font-size: 0.65rem; 
+    color: #0077b6; /* 換個顯眼的藍色 */
+    vertical-align: middle; 
+    margin-left: 2px;
+    margin-right: 4px;
+    transform: translateY(-2px); /* 稍微向上微調對齊 */
 }
 
 /* 拖曳中樣式 */
@@ -143,13 +173,13 @@ h1 {
 .correct { color: #2a9d8f; }
 .wrong { color: #e76f51; }
 
-/* ================== 修改：計分板右側專用樣式 ================== */
+/* ================== 計分板右側專用樣式 ================== */
 .scoreboard {
     background-color: #fff;
     border-radius: 15px;
     padding: 20px;
-    width: 320px; /* 固定右側計分板寬度 */
-    flex-shrink: 0; /* 防止被左側擠壓變形 */
+    width: 320px; 
+    flex-shrink: 0; 
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     border: 2px solid #e9ecef;
     box-sizing: border-box;
@@ -173,7 +203,7 @@ h1 {
     border: 2px solid #ddd;
     border-radius: 5px;
     outline: none;
-    flex: 1; /* 自動填滿剩餘空間 */
+    flex: 1; 
     min-width: 0;
     box-sizing: border-box;
 }
@@ -194,7 +224,7 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    max-height: 400px; /* 超過高度時允許滾動 */
+    max-height: 400px; 
     overflow-y: auto;
     padding-right: 5px;
 }
@@ -256,9 +286,4 @@ h1 {
         max-width: 600px;
         margin-top: 20px;
     }
-}
-rt {
-    font-size: 0.55rem;
-    font-weight: normal;
-    color: #666; /* 稍微淡一點的顏色，比較精緻 */
 }
