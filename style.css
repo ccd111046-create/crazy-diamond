@@ -14,19 +14,35 @@ h1 {
     font-size: 1.1rem;
 }
 
+/* ================== 新增：左右分欄彈性版面 ================== */
+.main-layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 30px;
+    max-width: 1400px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+/* 左側遊戲區域 */
+.game-area {
+    flex: 1;
+    max-width: 1000px;
+}
+
 /* 答案格子區 */
 .target-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
-    margin: 30px auto;
-    max-width: 1000px;
+    margin: 0 auto 30px auto;
 }
 
 .drop-zone {
-    width: 165px; /* 稍微加寬 */
-    height: 185px; /* 加高以容納新卡片 */
+    width: 165px; 
+    height: 185px; 
     border: 3px dashed #bbb;
     border-radius: 10px;
     background-color: #fff;
@@ -39,7 +55,7 @@ h1 {
 }
 
 .drop-zone::before {
-    content: attr(data-step); /* 顯示步驟數字 1~10 */
+    content: attr(data-step); 
     position: absolute;
     top: 5px;
     left: 10px;
@@ -54,26 +70,25 @@ h1 {
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
-    margin: 40px auto;
+    margin: 30px auto;
     padding: 20px;
     background-color: #e9ecef;
     border-radius: 15px;
-    max-width: 1000px;
     min-height: 150px;
 }
 
 .step-card {
-    width: 150px; /* 卡片加寬 */
-    height: 170px; /* 卡片加高 */
-    background-color: #ffffff; /* 改為白底，讓圖片更乾淨突出 */
+    width: 150px; 
+    height: 170px; 
+    background-color: #ffffff; 
     border: 2px solid #ff4d6d;
     border-radius: 8px;
     display: flex;
-    flex-direction: column; /* 改為垂直排列：圖在上、文在下 */
+    flex-direction: column; 
     align-items: center;
     justify-content: flex-start;
     padding: 8px;
-    box-sizing: border-box; /* 確保 padding 不會撐破卡片 */
+    box-sizing: border-box; 
     cursor: grab;
     user-select: none;
     box-shadow: 0 4px 6px rgba(0,0,0,0.1);
@@ -85,16 +100,14 @@ h1 {
     transform: scale(0.95);
 }
 
-/* 新增：卡片內的圖片樣式 */
 .card-img {
     width: 100%;
-    height: 100px; /* 固定圖片高度 */
-    object-fit: cover; /* 讓圖片填滿範圍且不變形 */
+    height: 100px; 
+    object-fit: cover; 
     border-radius: 4px;
-    margin-bottom: 8px; /* 和下方文字保持一點距離 */
+    margin-bottom: 8px; 
 }
 
-/* 新增：卡片內的文字樣式 */
 .card-text {
     font-size: 0.85rem;
     font-weight: bold;
@@ -129,15 +142,17 @@ h1 {
 }
 .correct { color: #2a9d8f; }
 .wrong { color: #e76f51; }
-/* ================== 新增：計分板樣式 ================== */
+
+/* ================== 修改：計分板右側專用樣式 ================== */
 .scoreboard {
     background-color: #fff;
     border-radius: 15px;
     padding: 20px;
-    margin: 40px auto;
-    max-width: 600px;
+    width: 320px; /* 固定右側計分板寬度 */
+    flex-shrink: 0; /* 防止被左側擠壓變形 */
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     border: 2px solid #e9ecef;
+    box-sizing: border-box;
 }
 
 .scoreboard h2 {
@@ -158,7 +173,9 @@ h1 {
     border: 2px solid #ddd;
     border-radius: 5px;
     outline: none;
-    width: 200px;
+    flex: 1; /* 自動填滿剩餘空間 */
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .add-student-area button {
@@ -170,12 +187,16 @@ h1 {
     cursor: pointer;
     font-weight: bold;
     font-size: 1rem;
+    flex-shrink: 0;
 }
 
 .student-list {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    max-height: 400px; /* 超過高度時允許滾動 */
+    overflow-y: auto;
+    padding-right: 5px;
 }
 
 .student-item {
@@ -183,35 +204,56 @@ h1 {
     justify-content: space-between;
     align-items: center;
     background-color: #f8f9fa;
-    padding: 10px 20px;
+    padding: 10px 15px;
     border-radius: 8px;
     border-left: 6px solid #2ec4b6;
 }
 
 .student-info {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: bold;
     color: #333;
+    text-align: left;
 }
 
 .student-score {
     color: #ff4d6d;
-    font-size: 1.5rem;
-    margin: 0 10px;
+    font-size: 1.3rem;
+    margin: 0 5px;
+}
+
+.score-controls {
+    display: flex;
+    gap: 5px;
 }
 
 .score-controls button {
-    font-size: 1.2rem;
-    width: 35px;
-    height: 35px;
-    margin-left: 5px;
+    font-size: 1.1rem;
+    width: 32px;
+    height: 32px;
     border: none;
     border-radius: 50%;
     cursor: pointer;
     font-weight: bold;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .btn-plus { background-color: #2ec4b6; color: white; }
 .btn-minus { background-color: #e76f51; color: white; }
 .btn-plus:active, .btn-minus:active { transform: scale(0.9); }
+
+/* ================== 響應式：當螢幕太小時換回直排 ================== */
+@media (max-width: 1200px) {
+    .main-layout {
+        flex-direction: column;
+        align-items: center;
+    }
+    .scoreboard {
+        width: 100%;
+        max-width: 600px;
+        margin-top: 20px;
+    }
+}
